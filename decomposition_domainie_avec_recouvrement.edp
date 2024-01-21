@@ -1,0 +1,95 @@
+int n = 40;
+
+//superieur
+// Partie horizontale supérieure 
+border a(t=1, 0.75) { x=t; y=1; label=1; };
+
+// Partie verticale à gauche 
+border b(t=1, 0.4) { x=0.75; y=t; label=2; };
+
+// Partie horizontale inférieure
+border c(t=0.75, 1) { x=t; y=0.4; label=3; };
+
+// Partie verticale à droite
+border d(t=0.4, 0.6) { x=1; y=t; label=4; };
+
+// Arc de cercle extérieur
+border i(t=-pi/2, pi/2) { x=1+0.2*cos(t); y=0.8+0.2*sin(t); label=9; };
+
+//interieur
+// Partie horizontale supérieure intérieure
+border j(t=1, 0.85) { x=t; y=0.90; label=10; };
+
+// Partie horizontale inférieure intérieure
+border k(t=0.85, 1) { x=t; y=0.70; label=11; };
+
+// Partie verticale intérieure
+border l(t=0.90, 0.70) { x=0.85; y=t; label=12; };
+
+// Arc de cercle intérieur
+border m(t=-pi/2, pi/2) { x=1+0.1*cos(t); y=0.80+0.1*sin(t); label=13; };
+
+//inferieur
+// Partie horizontale superier 
+border e(t=1, 0.75) { x=t; y=0.5; label=5; };
+
+// Partie verticale à gauche
+border f(t=0.5, 0) { x=0.75; y=t; label=6; };
+
+// Partie horizontale inferieur 
+border g(t=0.75, 1) { x=t; y=0; label=7; };
+
+// Partie verticale à droite
+border h(t=0, 0.5) { x=1; y=t; label=8; };
+
+mesh Th1 = buildmesh(a(n)+b(n)+c(n)+d(n)+i(n)+j(-n)+k(-n)+l(-n)+m(-n));
+mesh Th2 = buildmesh(e(n)+f(n)+g(n)+h(n));
+
+// Affichage des maillages
+// plot(Th1, Th2, value=1, wait=1);
+
+int Nbiter = 10; // nombre max d'iter
+
+fespace Vh1(Th1, P1);
+fespace Vh2(Th2, P1);
+Vh1 uh1, vh1;
+Vh2 uh2, vh2;
+    
+uh2=0;
+
+for (int i = 0; i < Nbiter; i++){
+
+    //on définit le probleme variationnel
+
+    problem laplacian1(uh1, vh1, solver = LU) =
+            int2d(Th1)(
+            dx(uh1) * dx(vh1) + dy(uh1) * dy(vh1)  // bilinear form for Laplacian
+        )
+        - int2d(Th1)(
+             vh1 
+        )
+        + on(1, 2, 4, 9, 10, 11, 12, 13, uh1 = 0)  // Dirichlet boundary conditions
+        + on(3, uh1 = uh2);
+    // Solve the variational problem
+    laplacian1;
+
+    //on définit le probleme variationnel
+
+    problem laplacian2(uh2, vh2, solver = LU) =
+            int2d(Th2)(
+            dx(uh2) * dx(vh2) + dy(uh2) * dy(vh2)  // bilinear form for Laplacian
+        )
+        - int2d(Th2)(
+             vh2  
+        )
+        + on(6, 7, 8, uh2 = 0)  // Dirichlet boundary conditions
+        + on(5, uh2 = uh1); 
+
+    // Solve the variational problem
+    laplacian2;
+    plot(uh1, uh2, wait=1); 
+    
+}
+
+// Plot de la solution finale
+plot(uh1, uh2, wait=1); 

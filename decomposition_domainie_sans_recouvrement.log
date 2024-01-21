@@ -1,0 +1,29 @@
+  -- Solve :
+          min 2.27701e-64  max 0.00756524
+  -- Solve :
+          min 2.23837e-64  max 0.00764959
+  -- Solve :
+          min 2.27701e-64  max 0.00756778
+  -- Solve :
+          min 2.23836e-64  max 0.00764779
+  -- Solve :
+          min 2.27701e-64  max 0.00757012
+  -- Solve :
+          min 2.23836e-64  max 0.00764613
+  -- Solve :
+          min 2.27701e-64  max 0.00757228
+  -- Solve :
+          min 2.23835e-64  max 0.0076446
+  -- Solve :
+          min 2.27701e-64  max 0.00757427
+  -- Solve :
+          min 2.23835e-64  max 0.0076432
+  -- Solve :
+          min 2.27701e-64  max 0.00757609
+  -- Solve :
+          min 2.23834e-64  max 0.0076419
+times: compile 0.055s, execution 2.304s,  mpirank:0
+ CodeAlloc : nb ptr  3944,  size :495504 mpirank: 0
+ WARNING NUMBER bad SearchMethod cas in 2d: 58020 int 3d 0(essai d2: 0 3d: 0 )
+Ok: Normal End
+ try getConsole C:\Users\decroux paul\Documents\info\calcul_scientifique\decomposition_domainie_sans_recouvrement.edp
