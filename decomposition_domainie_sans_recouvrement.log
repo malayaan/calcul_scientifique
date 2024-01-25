@@ -1,29 +1,29 @@
   -- Solve :
-          min 2.27701e-64  max 0.00756524
+          min 2.27701e-64  max 0.00752401
   -- Solve :
-          min 2.23837e-64  max 0.00764959
+          min 2.23847e-64  max 0.00767877
   -- Solve :
-          min 2.27701e-64  max 0.00756778
+          min 2.27701e-64  max 0.00752983
   -- Solve :
-          min 2.23836e-64  max 0.00764779
+          min 2.23846e-64  max 0.00767465
   -- Solve :
-          min 2.27701e-64  max 0.00757012
+          min 2.27701e-64  max 0.00753518
   -- Solve :
-          min 2.23836e-64  max 0.00764613
+          min 2.23844e-64  max 0.00767086
   -- Solve :
-          min 2.27701e-64  max 0.00757228
+          min 2.27701e-64  max 0.00754011
   -- Solve :
-          min 2.23835e-64  max 0.0076446
+          min 2.23843e-64  max 0.00766737
   -- Solve :
-          min 2.27701e-64  max 0.00757427
+          min 2.27701e-64  max 0.00754465
   -- Solve :
-          min 2.23835e-64  max 0.0076432
+          min 2.23842e-64  max 0.00766416
   -- Solve :
-          min 2.27701e-64  max 0.00757609
+          min 2.27701e-64  max 0.00754883
   -- Solve :
-          min 2.23834e-64  max 0.0076419
-times: compile 0.082s, execution 9.394s,  mpirank:0
- CodeAlloc : nb ptr  3944,  size :495504 mpirank: 0
- WARNING NUMBER bad SearchMethod cas in 2d: 58020 int 3d 0(essai d2: 0 3d: 0 )
+          min 2.23841e-64  max 0.0076612
+times: compile 0.07s, execution 1.667s,  mpirank:0
+ CodeAlloc : nb ptr  3947,  size :495584 mpirank: 0
+ WARNING NUMBER bad SearchMethod cas in 2d: 29010 int 3d 0(essai d2: 0 3d: 0 )
 Ok: Normal End
  try getConsole C:\Users\decroux paul\Documents\info\calcul_scientifique\decomposition_domainie_sans_recouvrement.edp

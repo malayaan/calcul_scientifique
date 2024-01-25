@@ -1,32 +1,37 @@
-// Parameters
-int inside = 2; int outside = 1; int n = 30;
+// Paramètres de simulation
+int inside = 2; // Label pour l'intérieur du domaine
+int outside = 1; // Label pour l'extérieur du domaine
+int n = 30; // Nombre de subdivisions pour le maillage
+int Nbiter = 10; // Nombre maximum d'itérations
 
-// Mesh
-border a(t=0, 0.4) { x=1; y=t; label=outside;};
-border b(t=0.75, 1) { x=t; y=0; label=outside;};
-border c(t=0.4, 0) { x=0.75; y=t; label=outside;};
-border d(t=1, 0.75) { x=t; y=0.4; label=inside;};
+// Construction du maillage
+// Définition des bordures extérieures
+border a(t=0, 0.4) { x=1; y=t; label=outside; };
+border b(t=0.75, 1) { x=t; y=0; label=outside; };
+border c(t=0.4, 0) { x=0.75; y=t; label=outside; };
+border d(t=1, 0.75) { x=t; y=0.4; label=inside; };
 
-
-//superieur
+// Définition des bordures pour la partie supérieure du domaine
 border d1(t=1, 0.75) { x=t; y=1; label=outside; };
 border d2(t=1, 0.4) { x=0.75; y=t; label=outside; };
 border d3(t=0.75, 1) { x=t; y=0.4; label=inside; };
 border d4(t=0.4, 0.6) { x=1; y=t; label=outside; };
 border d5(t=-pi/2, pi/2) { x=1+0.2*cos(t); y=0.8+0.2*sin(t); label=outside; };
 
-//interieur
+// Définition des bordures pour la partie intérieure
 border i1(t=1, 0.85) { x=t; y=0.90; label=outside; };
 border i2(t=0.85, 1) { x=t; y=0.70; label=outside; };
 border i3(t=0.90, 0.70) { x=0.85; y=t; label=outside; };
 border i4(t=-pi/2, pi/2) { x=1+0.1*cos(t); y=0.80+0.1*sin(t); label=outside; };
 
-
+// Création des maillages
 mesh th = buildmesh(a(n) + b(n) + c(n) + d(n));
 mesh TH = buildmesh(d1(n)+d2(n)+d3(n)+d4(n)+d5(n)+i1(-n)+i2(-n)+i3(-n)+i4(-n));
+
+// Affichage des maillages
 plot(th, TH, wait=true);
 
-// Fespace
+// Définition des espaces de fonctions
 fespace vh(th, P1);
 vh u=0, v;
 vh lambda=0;
@@ -34,7 +39,7 @@ vh lambda=0;
 fespace VH(TH, P1);
 VH U, V;
 
-// Problem
+// Définition et résolution des problèmes
 int i = 0;
 problem PB (U, V, init=i, solver=Cholesky)
     = int2d(TH)(
@@ -47,8 +52,7 @@ problem PB (U, V, init=i, solver=Cholesky)
     + int1d(TH, inside)(
           lambda*V
     )
-    + on(outside, U= 0 )
-    ;
+    + on(outside, U= 0 );
 
 problem pb (u, v, init=i, solver=Cholesky)
     = int2d(th)(
@@ -61,18 +65,17 @@ problem pb (u, v, init=i, solver=Cholesky)
     + int1d(th, inside)(
         - lambda*v
     )
-    + on(outside, u=0)
-    ;
+    + on(outside, u=0);
 
-for (i = 0; i < 20; i++){
-    // Solve
-    PB;
-    pb;
-    lambda = lambda - (u-U)/2;
+// Boucle de résolution itérative
+for (i = 0; i < Nbiter; i++) {
+    PB; // Résout le problème sur TH
+    pb; // Résout le problème sur th
+    lambda = lambda - (u-U)/2; // Mise à jour de lambda
 
-    // Plot
-    plot(U,u,wait=0);
+    // Affichage des résultats
+    plot(U, u, wait=0);
 }
 
-// Plot
+// Affichage final des solutions
 plot(U, u, wait=1);
