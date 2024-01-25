@@ -23,7 +23,7 @@
   SkyLineMatrix: size pL/pU: 1312 37156 37156 moy=28.3201
   -- Solve :
           min 1.53715e-35  max 0.00764097
-times: compile 0.11s, execution 5.396s,  mpirank:0
+times: compile 0.129s, execution 12.763s,  mpirank:0
  CodeAlloc : nb ptr  3909,  size :492760 mpirank: 0
 Ok: Normal End
  try getConsole C:\Users\decroux paul\Documents\info\calcul_scientifique\decomposition_domainie_avec_recouvrement.edp
