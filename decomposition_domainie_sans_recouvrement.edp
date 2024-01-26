@@ -1,7 +1,7 @@
 // Paramètres de simulation
 int inside = 2; // Label pour l'intérieur du domaine
 int outside = 1; // Label pour l'extérieur du domaine
-int n = 30; // Nombre de subdivisions pour le maillage
+int n = 40; // Nombre de subdivisions pour le maillage
 int Nbiter = 10; // Nombre maximum d'itérations
 
 // Construction du maillage
